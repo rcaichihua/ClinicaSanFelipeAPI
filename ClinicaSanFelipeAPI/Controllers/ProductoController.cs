@@ -25,6 +25,17 @@ namespace ClinicaSanFelipeAPI.Controllers
 		{ 
 			return await _mediator.Send(new ConsultaId.ProductoUnico{Id = id});
 		}
-	}
+		[HttpPost]
+		public async Task<ActionResult<Unit>> Crear(Nuevo.Ejecuta ejecuta)
+		{
+			return await _mediator.Send(ejecuta);
+		}
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Unit>> Editar(int id, Editar.Ejecuta ejecuta)
+        {
+			ejecuta.IdProducto = id;
+            return await _mediator.Send(ejecuta);
+        }
+    }
 }
 
