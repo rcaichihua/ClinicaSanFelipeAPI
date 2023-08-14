@@ -31,7 +31,7 @@ namespace ClinicaSanFelipeAPI.Controllers
 			return await _mediator.Send(ejecuta);
 		}
         [HttpPut("{id}")]
-        public async Task<ActionResult<Unit>> Editar(int id, Editar.Ejecuta ejecuta)
+        public async Task<ActionResult<Unit>> Editar(int id, Editar.EjecutaE ejecuta)
         {
 			ejecuta.IdProducto = id;
             return await _mediator.Send(ejecuta);

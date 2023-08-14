@@ -8,7 +8,7 @@ namespace ClinicaSanFelipeAPI.Application.Productos
 	{
 		public class Ejecuta : IRequest
 		{
-            public string DescripcionProducto { get; set; }
+            public string? DescripcionProducto { get; set; }
             public double PrecioCompra { get; set; }
             public DateTime FechaLote { get; set; }
         }
@@ -35,7 +35,7 @@ namespace ClinicaSanFelipeAPI.Application.Productos
                 {
                     return Unit.Value;
                 }
-                throw new Exception("No se pudo insertar el curso.");
+                throw new Exception("No se pudo insertar el producto.");
             }
         }
     }
