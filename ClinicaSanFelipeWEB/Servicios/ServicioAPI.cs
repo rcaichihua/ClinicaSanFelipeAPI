@@ -72,14 +72,19 @@ namespace ClinicaSanFelipeWEB.Servicios
 
             var content = new StringContent(JsonConvert.SerializeObject(producto), Encoding.UTF8, "application/json");
 
-            var response = await cliente.PostAsync($"Producto", content);
+            var response = await cliente.PutAsync($"Producto", content);
 
             return response.IsSuccessStatusCode;
         }
 
-        public Task<bool> Eliminar(int idProducto)
+        public async Task<bool> Eliminar(int idProducto)
         {
-            throw new NotImplementedException();
+            var cliente = new HttpClient();
+            cliente.BaseAddress = new Uri(_baseUrl);
+
+            var response = await cliente.DeleteAsync($"Producto/{idProducto}");
+
+            return response.IsSuccessStatusCode;
         } 
     }
 }

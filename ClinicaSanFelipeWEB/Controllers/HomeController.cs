@@ -1,32 +1,44 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ClinicaSanFelipeWEB.Models;
+using ClinicaSanFelipeWEB.Servicios;
 
 namespace ClinicaSanFelipeWEB.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly IServicioAPI _servicioAPI;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(IServicioAPI servicioAPI)
     {
-        _logger = logger;
+        _servicioAPI = servicioAPI;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        List<Producto> lista = await _servicioAPI.Lista();
+
+        return View(lista);
     }
 
-    public IActionResult Privacy()
+    public async Task<IActionResult> Producto(int idProducto)
     {
-        return View();
+        Producto modeloProducto = new Producto();
+        ViewBag.Accion = "Nuevo producto";
+        if (idProducto != 0)
+        {
+            modeloProducto = await _servicioAPI.Obtener(idProducto);
+            ViewBag.Accion = "Editar producto";
+        }
+
+        return View(modeloProducto);
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    [HttpPost]
+    public async Task<IActionResult> Guardar(Producto producto)
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        return (producto.IdProducto == 0 ? (await _servicioAPI.Guardar(producto)) :
+            (await _servicioAPI.Editar(producto))) ? RedirectToAction("Index") : NoContent();
     }
 }
 

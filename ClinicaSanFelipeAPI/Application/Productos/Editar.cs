@@ -22,12 +22,7 @@ namespace ClinicaSanFelipeAPI.Application.Productos
             }
 
             public async Task<Unit> Handle(EjecutaE request, CancellationToken cancellationToken)
-            {
-                //var producto = await _context.Productos.FindAsync(request.IdProducto) ?? throw new Exception("El producto no existe");
-                //producto.DescripcionProducto = request.DescripcionProducto ?? producto.DescripcionProducto;
-                //producto.PrecioCompra = request.PrecioCompra ?? producto.PrecioCompra;
-                //producto.FechaLote = request.FechaLote ?? producto.FechaLote;
-                
+            {              
                 var producto = await _context.Productos.FindAsync(request.IdProducto) ?? throw new Exception("El producto no existe");
                 producto.DescripcionProducto = request.DescripcionProducto ?? producto.DescripcionProducto;
                 producto.PrecioCompra = request.PrecioCompra ?? producto.PrecioCompra;
