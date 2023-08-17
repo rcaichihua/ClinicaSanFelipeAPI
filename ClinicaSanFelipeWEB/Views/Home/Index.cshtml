@@ -1,9 +1,50 @@
-﻿@{
+﻿@model List<Producto>
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        Lista de Productos
+    </div>
+    <div class="card-body">
+        
+        <a asp-action="Producto" asp-controller="Home" asp-route-idProducto="0" class="btn btn-success btn-sm">Nuevo Producto</a>
+        <hr/>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Descripcion</th>
+                <th>Precio Compra</th>
+                <th>Precio Venta</th>
+                <th>Fecha Lote</th>
+                <th>Fecha Registro</th>
+            </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.IdProducto</td>
+                        <td>@item.DescripcionProducto</td>
+                        <td>@item.PrecioCompra</td>
+                        <td>@item.PrecioVenta</td>
+                        <td>@item.FechaLote</td>
+                        <td>@item.FecRegistro</td>
+                        <td>
+                            <a asp-action="Producto" asp-controller="Home" 
+                               asp-route-idProducto="@item.IdProducto" 
+                               class="btn btn-primary btn-sm">Editar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 

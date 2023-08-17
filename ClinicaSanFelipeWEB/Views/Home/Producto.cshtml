@@ -1,0 +1,52 @@
+﻿@model Producto
+@{
+    ViewData["Title"] = "Producto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        @ViewBag.Accion
+    </div>
+    <div class="card-body">
+
+        <form asp-action="Guardar" asp-controller="Home" method="post">
+
+            <input type="hidden" asp-for="IdProducto" />
+
+            <div class="mb-2">
+                <label class="form-label">Codigo</label>
+                <input type="text" class="form-control form-control-sm" asp-for="IdProducto" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Descripcion</label>
+                <input type="text" class="form-control form-control-sm" asp-for="DescripcionProducto" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Precio Compra</label>
+                <input type="text" class="form-control form-control-sm" asp-for="PrecioCompra" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Precio Venta</label>
+                <input type="text" class="form-control form-control-sm" asp-for="PrecioVenta" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Fecha Lote</label>
+                <input type="date" class="form-control form-control-sm" asp-for="FechaLote" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Fecha Registro</label>
+                <input type="date" class="form-control form-control-sm" asp-for="FecRegistro" />
+            </div>
+
+            <button type="submit" class="btn btn-success btn-sm">Guardar Cambios</button>
+            <a asp-action="Index" asp-controller="Home" class="btn btn-warning btn-sm">Volver a lista</a>
+        </form>
+
+
+        
+       
+    </div>
+
+</div>
+
